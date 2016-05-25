@@ -249,61 +249,61 @@ module ActiveShipping
                     xml.OptionType(SIGNATURE_OPTION_CODES[package.options[:signature_option] || :default_for_service])
                   end
                 end
-                xml.CustomsClearanceDetail do
-                  xml.DutiesPayment do
-                    xml.PaymentType('SENDER')
-                    xml.Payor do
-                      xml.ResponsibleParty do
-                        xml.AccountNumber(510087623)
-                        xml.Contact do
-                          xml.PersonName(origin.name)
-                          xml.EMailAddress("jnorton88@gmail.com")
-                        end
-                        xml.Address do
-                          xml.StreetLines(origin.address1)
-                          # xml.StreetLines('Amchya gharakade line 2')
-                          xml.City(origin.city)
-                          xml.StateOrProvinceCode(origin.state)
-                          xml.PostalCode(origin.zip)
-                          xml.CountryCode("CA")
-                        end
-                      end
+              end
+            end
+            xml.CustomsClearanceDetail do
+              xml.DutiesPayment do
+                xml.PaymentType('SENDER')
+                xml.Payor do
+                  xml.ResponsibleParty do
+                    xml.AccountNumber(510087623)
+                    xml.Contact do
+                      xml.PersonName(origin.name)
+                      xml.EMailAddress("jnorton88@gmail.com")
+                    end
+                    xml.Address do
+                      xml.StreetLines(origin.address1)
+                      # xml.StreetLines('Amchya gharakade line 2')
+                      xml.City(origin.city)
+                      xml.StateOrProvinceCode(origin.state)
+                      xml.PostalCode(origin.zip)
+                      xml.CountryCode("CA")
                     end
                   end
+                end
+              end
 
-                  xml.CustomsValue do
-                    xml.Currency('CAD')
-                    xml.Amount(packages[0].value)
-                  end
+              xml.CustomsValue do
+                xml.Currency('CAD')
+                xml.Amount(packages[0].value)
+              end
 
                   # xml.DocumentContent('DOCUMENTS_ONLY')
 
-                  xml.CommercialInvoice do
-                    xml.Purpose('SOLD')
-                    # xml.CustomerReferences do
-                    #   xml.
-                    # end
-                  end
+              xml.CommercialInvoice do
+                xml.Purpose('SOLD')
+                # xml.CustomerReferences do
+                #   xml.
+                # end
+              end
 
-                  xml.Commodities do
-                    xml.NumberOfPieces(1)
-                    xml.Description('Coffee Pods')
-                    xml.CountryOfManufacture('CAD')
-                    xml.Weight do
-                      xml.Units('KG')
-                      xml.Value(packages[0].weight.in_kg.amount)
-                    end
-                    xml.Quantity(1)
-                    xml.QuantityUnits('PCS')
-                    xml.UnitPrice do
-                      xml.Currency('CAD')
-                      xml.Amount(100)
-                    end
-                    xml.CustomsValue do
-                      xml.Currency('CAD')
-                      xml.Amount(packages[0].value)
-                    end
-                  end
+              xml.Commodities do
+                xml.NumberOfPieces(1)
+                xml.Description('Coffee Pods')
+                xml.CountryOfManufacture('CAD')
+                xml.Weight do
+                  xml.Units('KG')
+                  xml.Value(packages[0].weight.in_kg.amount)
+                end
+                xml.Quantity(1)
+                xml.QuantityUnits('PCS')
+                xml.UnitPrice do
+                  xml.Currency('CAD')
+                  xml.Amount(100)
+                end
+                xml.CustomsValue do
+                  xml.Currency('CAD')
+                  xml.Amount(packages[0].value)
                 end
               end
             end
