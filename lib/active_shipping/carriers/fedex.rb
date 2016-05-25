@@ -257,15 +257,15 @@ module ActiveShipping
                         xml.AccountNumber(510087623)
                         xml.Contact do
                           xml.PersonName(origin.name)
-                          xml.EMailAddress(origin.email)
+                          xml.EMailAddress("jnorton88@gmail.com")
                         end
                         xml.Address do
-                          xml.StreetLines(origin.address)
+                          xml.StreetLines(origin.address1)
                           # xml.StreetLines('Amchya gharakade line 2')
                           xml.City(origin.city)
                           xml.StateOrProvinceCode(origin.state)
                           xml.PostalCode(origin.zip)
-                          xml.CountryCode(origin.country)
+                          xml.CountryCode("CA")
                         end
                       end
                     end
