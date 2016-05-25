@@ -185,7 +185,6 @@ module ActiveShipping
     protected
 
     def build_shipment_request(origin, destination, packages, options = {})
-      binding.pry
       imperial = location_uses_imperial(origin)
 
       xml_builder = Nokogiri::XML::Builder.new do |xml|
@@ -274,7 +273,7 @@ module ActiveShipping
 
                   xml.CustomsValue do
                     xml.Currency('CAD')
-                    xml.Amount(packages.value)
+                    xml.Amount(packages[0].value)
                   end
 
                   # xml.DocumentContent('DOCUMENTS_ONLY')
@@ -292,7 +291,7 @@ module ActiveShipping
                     xml.CountryOfManufacture('CAD')
                     xml.Weight do
                       xml.Units('KG')
-                      xml.Value(packages.weight.in_kg.amount)
+                      xml.Value(packages[0].weight.in_kg.amount)
                     end
                     xml.Quantity(1)
                     xml.QuantityUnits('PCS')
@@ -302,7 +301,7 @@ module ActiveShipping
                     end
                     xml.CustomsValue do
                       xml.Currency('CAD')
-                      xml.Amount(packages.value)
+                      xml.Amount(packages[0].value)
                     end
                   end
                 end
