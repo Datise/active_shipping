@@ -256,7 +256,7 @@ module ActiveShipping
                       xml.ResponsibleParty do
                         xml.AccountNumber(510087623)
                         xml.Contact do
-                          xml.PersonName(origin.contact_name)
+                          xml.PersonName(origin.name)
                           xml.EMailAddress(origin.email)
                         end
                         xml.Address do
