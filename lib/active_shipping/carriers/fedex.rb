@@ -185,6 +185,7 @@ module ActiveShipping
     protected
 
     def build_shipment_request(origin, destination, packages, options = {})
+      binding.pry
       imperial = location_uses_imperial(origin)
 
       xml_builder = Nokogiri::XML::Builder.new do |xml|
