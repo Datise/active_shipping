@@ -224,33 +224,6 @@ module ActiveShipping
             end
 
             xml.RateRequestTypes('ACCOUNT')
-
-            xml.PackageCount(packages.size)
-            packages.each do |package|
-              xml.RequestedPackageLineItems do
-                xml.GroupPackageCount(1)
-                build_package_weight_node(xml, package, imperial)
-                build_package_dimensions_node(xml, package, imperial)
-
-                # Reference Numbers
-                reference_numbers = Array(package.options[:reference_numbers])
-                if reference_numbers.size > 0
-                  xml.CustomerReferences do
-                    reference_numbers.each do |reference_number_info|
-                      xml.CustomerReferenceType(reference_number_info[:type] || "CUSTOMER_REFERENCE")
-                      xml.Value(reference_number_info[:value])
-                    end
-                  end
-                end
-
-                xml.SpecialServicesRequested do
-                  xml.SpecialServiceTypes("SIGNATURE_OPTION")
-                  xml.SignatureOptionDetail do
-                    xml.OptionType(SIGNATURE_OPTION_CODES[package.options[:signature_option] || :default_for_service])
-                  end
-                end
-              end
-            end
             xml.CustomsClearanceDetail do
               xml.DutiesPayment do
                 xml.PaymentType('SENDER')
@@ -304,6 +277,32 @@ module ActiveShipping
                 xml.CustomsValue do
                   xml.Currency('CAD')
                   xml.Amount(packages[0].value)
+                end
+              end
+            end
+            xml.PackageCount(packages.size)
+            packages.each do |package|
+              xml.RequestedPackageLineItems do
+                xml.GroupPackageCount(1)
+                build_package_weight_node(xml, package, imperial)
+                build_package_dimensions_node(xml, package, imperial)
+
+                # Reference Numbers
+                reference_numbers = Array(package.options[:reference_numbers])
+                if reference_numbers.size > 0
+                  xml.CustomerReferences do
+                    reference_numbers.each do |reference_number_info|
+                      xml.CustomerReferenceType(reference_number_info[:type] || "CUSTOMER_REFERENCE")
+                      xml.Value(reference_number_info[:value])
+                    end
+                  end
+                end
+
+                xml.SpecialServicesRequested do
+                  xml.SpecialServiceTypes("SIGNATURE_OPTION")
+                  xml.SignatureOptionDetail do
+                    xml.OptionType(SIGNATURE_OPTION_CODES[package.options[:signature_option] || :default_for_service])
+                  end
                 end
               end
             end
