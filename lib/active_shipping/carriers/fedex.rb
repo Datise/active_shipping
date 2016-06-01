@@ -190,7 +190,7 @@ module ActiveShipping
       xml_builder = Nokogiri::XML::Builder.new do |xml|
         xml.ProcessShipmentRequest(xmlns: 'http://fedex.com/ws/ship/v17') do
           build_request_header(xml)
-          build_version_node(xml, 'ship', 13, 0 ,0)
+          build_version_node(xml, 'ship', 17, 0 ,0)
 
           xml.RequestedShipment do
             xml.ShipTimestamp(ship_timestamp(options[:turn_around_time]).iso8601(0))
