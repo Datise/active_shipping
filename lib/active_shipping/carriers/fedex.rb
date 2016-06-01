@@ -298,7 +298,6 @@ module ActiveShipping
                 end
               end
             end
-            binding.pry
           end
         end
       end
