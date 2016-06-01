@@ -302,11 +302,11 @@ module ActiveShipping
                 end
               end
             end
-            binding.pry
             xml.CustomsValue do
               xml.Currency('CAD')
               xml.Amount(packages[0].value)
             end
+            binding.pry
           end
         end
       end
