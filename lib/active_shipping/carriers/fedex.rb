@@ -255,26 +255,6 @@ module ActiveShipping
               #   #   xml.
               #   # end
               # end
-
-              # xml.Commodities do
-              #   xml.NumberOfPieces(1)
-              #   xml.Description('Coffee Pods')
-              #   xml.CountryOfManufacture('CAD')
-              #   xml.Weight do
-              #     xml.Units('KG')
-              #     xml.Value(packages[0].weight.in_kg.amount)
-              #   end
-              #   xml.Quantity(1)
-              #   xml.QuantityUnits('PCS')
-              #   xml.UnitPrice do
-              #     xml.Currency('CAD')
-              #     xml.Amount(100)
-              #   end
-              #   xml.CustomsValue do
-              #     xml.Currency('CAD')
-              #     xml.Amount(packages[0].value)
-              #   end
-              # end
             #end
             xml.PackageCount(packages.size)
             packages.each do |package|
@@ -302,9 +282,24 @@ module ActiveShipping
                 end
               end
             end
-            xml.CustomsValue do
-              xml.Currency('CAD')
-              xml.Amount(packages[0].value)
+            xml.Commodities do
+              xml.NumberOfPieces(1)
+              xml.Description('Coffee Pods')
+              xml.CountryOfManufacture('CAD')
+              xml.Weight do
+                xml.Units('KG')
+                xml.Value(packages[0].weight.in_kg.amount)
+              end
+              xml.Quantity(1)
+              xml.QuantityUnits('PCS')
+              xml.UnitPrice do
+                xml.Currency('CAD')
+                xml.Amount(100)
+              end
+              xml.CustomsValue do
+                xml.Currency('CAD')
+                xml.Amount(packages[0].value)
+              end
             end
             binding.pry
           end
