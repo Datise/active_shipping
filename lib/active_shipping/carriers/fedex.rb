@@ -228,7 +228,6 @@ module ActiveShipping
                     end
                     xml.Address do
                       xml.StreetLines(origin.address1)
-                      # xml.StreetLines('Amchya gharakade line 2')
                       xml.City(origin.city)
                       xml.StateOrProvinceCode(origin.state)
                       xml.PostalCode(origin.zip)
