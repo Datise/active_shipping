@@ -193,10 +193,6 @@ module ActiveShipping
           build_version_node(xml, 'ship', 13, 0 ,0)
 
           xml.RequestedShipment do
-            xml.CustomsValue do
-              xml.Currency('CAD')
-              xml.Amount(packages[0].value)
-            end
             xml.ShipTimestamp(ship_timestamp(options[:turn_around_time]).iso8601(0))
             xml.DropoffType('REGULAR_PICKUP')
             xml.ServiceType(options[:service_type] || 'FEDEX_GROUND')
@@ -305,6 +301,10 @@ module ActiveShipping
                   end
                 end
               end
+            end
+            xml.CustomsValue do
+              xml.Currency('CAD')
+              xml.Amount(packages[0].value)
             end
           end
         end
