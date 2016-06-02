@@ -86,6 +86,7 @@ module ActiveShipping
 
     # line_items should be a list of PackageItem's
     def create_shipment(origin, destination, package, line_items = [], options = {})
+      binding.pry
       request_body = build_shipment_request(origin, destination, package, line_items, options)
       response = ssl_post(create_shipment_url(options), request_body, headers(options, SHIPMENT_MIMETYPE, SHIPMENT_MIMETYPE))
       parse_shipment_response(response)
