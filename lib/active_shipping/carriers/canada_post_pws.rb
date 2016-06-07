@@ -51,6 +51,7 @@ module ActiveShipping
     attr_accessor :language, :endpoint, :logger, :platform_id, :customer_number
 
     def initialize(options = {})
+      binding.pry
       @language = LANGUAGE[options[:language]] || LANGUAGE['en']
       @endpoint = options[:endpoint] || ENDPOINT
       @platform_id = options[:platform_id]
