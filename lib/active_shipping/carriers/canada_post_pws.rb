@@ -66,9 +66,7 @@ module ActiveShipping
       url = endpoint + "rs/ship/price"
       request  = build_rates_request(origin, destination, line_items, options, package, services)
       response = ssl_post(url, request, headers(options, RATE_MIMETYPE, RATE_MIMETYPE))
-      binding.pry
       parse_rates_response(response, origin, destination)
-      binding.pry
     rescue ActiveUtils::ResponseError, ActiveShipping::ResponseError => e
       error_response(e.response.body, CPPWSRateResponse)
     end
@@ -91,7 +89,9 @@ module ActiveShipping
       binding.pry
       request_body = build_shipment_request(origin, destination, package, line_items, options)
       response = ssl_post(create_shipment_url(options), request_body, headers(options, SHIPMENT_MIMETYPE, SHIPMENT_MIMETYPE))
+      binding.pry
       parse_shipment_response(response)
+      binding.pry
     rescue ActiveUtils::ResponseError, ActiveShipping::ResponseError => e
       error_response(e.response.body, CPPWSShippingResponse)
     rescue MissingCustomerNumberError
