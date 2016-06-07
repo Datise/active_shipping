@@ -51,7 +51,6 @@ module ActiveShipping
     attr_accessor :language, :endpoint, :logger, :platform_id, :customer_number
 
     def initialize(options = {})
-      binding.pry
       @language = LANGUAGE[options[:language]] || LANGUAGE['en']
       @endpoint = options[:endpoint] || ENDPOINT
       @platform_id = options[:platform_id]
@@ -67,7 +66,9 @@ module ActiveShipping
       url = endpoint + "rs/ship/price"
       request  = build_rates_request(origin, destination, line_items, options, package, services)
       response = ssl_post(url, request, headers(options, RATE_MIMETYPE, RATE_MIMETYPE))
+      binding.pry
       parse_rates_response(response, origin, destination)
+      binding.pry
     rescue ActiveUtils::ResponseError, ActiveShipping::ResponseError => e
       error_response(e.response.body, CPPWSRateResponse)
     end
