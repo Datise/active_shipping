@@ -29,7 +29,7 @@ module ActiveShipping
     }
 
     ENDPOINT = "https://soa-gw.canadapost.ca/"    # production
-
+    TEST_ENDPOINT = "https://ct.soa-gw.canadapost.ca"
     SHIPMENT_MIMETYPE = "application/vnd.cpc.ncshipment+xml"
     RATE_MIMETYPE = "application/vnd.cpc.ship.rate+xml"
     TRACK_MIMETYPE = "application/vnd.cpc.track+xml"
@@ -52,7 +52,11 @@ module ActiveShipping
 
     def initialize(options = {})
       @language = LANGUAGE[options[:language]] || LANGUAGE['en']
-      @endpoint = options[:endpoint] || ENDPOINT
+      if options[:test_mode]
+        @endpoint = TEST_ENDPOINT
+      else
+        @endpoint = options[:endpoint] || ENDPOINT
+      end
       @platform_id = options[:platform_id]
       @customer_number = options[:customer_number]
       super(options)
